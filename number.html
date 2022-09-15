@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    font-family:sans-serif;
+}
+
+div{
+    text-align:center;
+    padding:10px;
+}
+
+.output-container div{
+    width: 150px;
+    font-size:24px;
+    clear:both;
+    display:inline-block;
+}
+
+.output-container p{
+    font-size:18px;
+    padding:5px;
+}
+
+.button-container button{
+    width:50px;
+    height:50px;
+    font-size:25px;
+    padding:5px;
+    background-color:white;
+    border:none;
+    color:blueviolet;
+}
+
+.button-container p{
+    padding:5px;
+}
+
+.score-container div{
+    font-size: 16px;
+    padding:15px;
+}
+
+.score-container button{
+    width:80px;
+    height:36px;
+    font-size:15px;
+    background-color:#0077ff;
+    color:#ffffff;
+    border:none;
+}
+body{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #ffffff;
+}
+
+
+</style>
+<body bgcolor="blueviolet" >
+  <body onload="reset();">
+    <br> <br> <br>
+    <div class="output-container">
+        <div>AI: <span id="ai-number"></span></div>
+        <div>Your guess: <span id="user-number"></span></div>
+        <p id="msg"></p>
+        <p id="result"></p>
+    </div>
+    <div class="button-container">
+        <p>
+        <button id="btn-1" onclick="user(1);">1</button>
+        <button id="btn-2" onclick="user(2);">2</button>
+        <button id="btn-3" onclick="user(3);">3</button>
+        </p>
+        <p>
+        <button id="btn-4" onclick="user(4);">4</button>
+        <button id="btn-5" onclick="user(5);">5</button>
+        <button id="btn-6" onclick="user(6);">6</button>
+        </p>
+        <p>
+        <button id="btn-7" onclick="user(7);">7</button>
+        <button id="btn-8" onclick="user(8);">8</button>
+        <button id="btn-9" onclick="user(9);">9</button>
+        </p>
+    </div>
+    <div class="score-container">
+        <div>Score: <span id="score"></span></div>
+        <div>Guess remaining: <span id="guess-remaining"></span></div>
+        <button id="reset" onclick="reset();">Reset</button>
+    </div>
+    <a style="text-decoration:none;float:left;" href="index.html">Win by luck game</a> <br>
+    <a style="text-decoration:none;float:left;" href="tictactoe.html">Tic Tac Toe</a> <br>
+    <a style="text-decoration:none;float:left;" href="snake.html">Guess the complete word </a><br>
+    <a style="text-decoration:none;float:left;" href="number.html">Guess the number </a><br>
+</body>
+<script>
+  //variables
+var score, guessRemaining, aiNum;
+
+//functions
+
+function reset(){
+    score = 0;
+    guessRemaining = 5;
+    document.getElementById('score').innerHTML=score;
+    document.getElementById('guess-remaining').innerHTML=guessRemaining;
+    document.getElementById('ai-number').innerHTML='';
+    document.getElementById('user-number').innerHTML='';
+    document.getElementById('msg').innerHTML='Start';
+    document.getElementById('result').innerHTML='';
+    ai();
+};
+
+function ai(){
+    aiNum = Math.floor(Math.random()*9)+1;
+};
+
+function user(n){
+    document.getElementById('user-number').innerHTML=n;
+    if(n==aiNum){
+        score++;
+        document.getElementById('msg').innerHTML='Correct Make a new guess.';
+    }else{
+        document.getElementById('msg').innerHTML='Wrong  Make a new guess.';
+    }
+    guessRemaining--;
+    displayResult();
+};
+
+function displayResult(){
+    document.getElementById('ai-number').innerHTML=aiNum;
+    document.getElementById('score').innerHTML=score;
+    document.getElementById('guess-remaining').innerHTML=guessRemaining;
+    if(guessRemaining==0){
+        document.getElementById('result').innerHTML='Your score: '+score+' out of 5 Click RESET to play again.';
+    }else{
+        ai();
+    }
+  
+};
+
+</script>
+</html>
