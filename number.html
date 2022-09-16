@@ -99,7 +99,7 @@ body{
     </div>
     <div class="score-container">
         <div>Score: <span id="score"></span></div>
-        <div>Guess remaining: <span id="guess-remaining"></span></div>
+        <div>Out of moves: <span id="guess-remaining"></span></div>
         <button id="reset" onclick="reset();">Reset</button>
     </div>
     <br> <br>
@@ -149,7 +149,7 @@ function displayResult(){
     document.getElementById('score').innerHTML=score;
     document.getElementById('guess-remaining').innerHTML=guessRemaining;
     if(guessRemaining==0){
-        document.getElementById('result').innerHTML='Your score: '+score+' out of 5 Click RESET to play again.';
+        document.getElementById('result').innerHTML='Your score: '+score+' out of 5 moves.';
     }else{
         ai();
     }
