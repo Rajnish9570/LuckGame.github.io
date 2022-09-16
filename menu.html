@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luck game</title>
+</head>
+<style>
+    body{
+    animation: change 20s infinite;
+  }
+  @keyframes change {
+    0%{background-color:#ff00ff;}
+    25%{background-color:#e1ffd6 ;}
+    50%{background-color:#ffff00 ;}
+    75%{background-color:#2a0c40 ;}
+    100%{background-color:#bdbfff ;}
+  }
+  *{
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  #pl1,#pl2,#btn{
+    margin: 10px;
+    padding: 15px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    box-shadow: 1px 2px 10px 0px gray;
+    background-color: #ffffff;
+  }
+  h1{
+    font-weight: 300;
+    font-size:22px;
+  }
+    a{
+  margin:10px;
+  padding:5px;
+  color:#ffffff;
+  text-decoration: none;
+  text-align: center;
+  }
+</style>
+<body>
+  <h1>Win Game By Your Luck</h1>
+  <hr color="black">
+  <br> <br> <br>
+  <div id="input">
+  <p style="text-decoration:overline ;">Enter The Palyer Name </p>
+    <input type="text" id="pl1"  placeholder="Player 1" required  autocomplete="off"> <br>
+    <input type="text" id="pl2" placeholder="Player 2" required autocomplete="off"> <br>
+    <input type="button" value="Start play" id="btn" onclick="submit()"> <br>
+    <img src="Dice.png" alt="" height="200px" width="200px"> <br>
+    <a href="index.html">Menu</a>
+  </div>
+  <div id="game" style="display:none;">
+    <br> <br> <br>
+    Player 1
+  <p style="display:block ;" id="first"></p>
+  <p id="no1">your points</p>
+  <br> <br> 
+  Player 2
+ <p id="second"></p>
+ <p id="no2">your points</p>
+  <br> 
+  <p id="result">Result</p>
+<input type="button" id="btn" value="click to play" onclick="gen()">
+<input type="button" id="btn" value="Home page" onclick="home()">
+  </div>
+
+</body>
+<script>
+  function gen(){
+  let a = Math.floor(Math.random()*10);
+document.getElementById("no1").innerHTML=a
+let b = Math.floor(Math.random()*10);
+document.getElementById("no2").innerHTML=b
+
+e=document.getElementById("pl1").value;
+ f=d=document.getElementById("pl2").value;
+  
+if(a>b){
+  document.getElementById("result").innerHTML= e +" "+"is winner"
+}
+  
+else if(b>a){
+  document.getElementById("result").innerHTML= f +" "+"is winner"
+}
+else{
+  document.getElementById("result").innerHTML="game is draw" 
+}
+}
+
+  
+  function submit(){
+    c=document.getElementById("pl1").value;
+    d=document.getElementById("pl2").value;
+    document.getElementById("first").innerHTML=c
+    document.getElementById("second").innerHTML=d
+    document.getElementById("input").style.display="none"
+    document.getElementById("game").style.display="inline"
+  }
+  
+  function home(){
+    document.getElementById("input").style.display="inline"
+    document.getElementById("game").style.display="none"
+  }
+
+</script>
+</html>
