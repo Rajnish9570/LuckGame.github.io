@@ -10,7 +10,7 @@
 
 <style>
     body{
-  background-color:#ff00ff;
+  background-color:#0000ff;
   text-align: center;
 }
   
@@ -69,12 +69,13 @@
 	#main {
 		text-align: center;
 	}
+
 </style>
 <body>
   
 	<div id="main">
 		<h1>TIC TAC TOE</h1>
-		<br><br>
+		<br>
 		<!-- 3*3 grid of Boxes -->
 		<input type="text" id="b1" onclick=
 			"myfunc_3(); myfunc();" readonly>
@@ -106,17 +107,18 @@
 			"myfunc_11();myfunc();" readonly>
 
 		<!-- Grid end here -->
-		<br><br><br>
+		<br><br>
 		<!-- Button to reset game -->
 		<button id="but" onclick="myfunc_2()">
 			RESET
 		</button>
 
-		<br><br>
+		<br>
 		<!-- Space to show player turn -->
 		<p id="print">Result</p>
 	</div>
-<a style="text-decoration:none;" href="index.html">Menu</a> <br>
+  <img src="tic.png" height="200" width="300"  alt=""><br>
+<a style="text-decoration:none;" href="index.html">Menu</a> 
 
 </body>
 <script>
@@ -441,7 +443,6 @@ else if ((b1 == 'X' || b1 == '0') && (b2 == 'X'
   b8 == '0') && (b9 == 'X' || b9 == '0')) {
     document.getElementById('print')
       .innerHTML = "Match Tie";
-    window.alert('Match Tie');
 }
 else {
 
