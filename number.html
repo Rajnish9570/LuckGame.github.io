@@ -84,7 +84,7 @@ body{
         <p id="msg"></p>
         <p id="result"></p>
     </div>
-    <div class="button-container">
+    <div class="button-container" onload="reset()">
         <p>
         <button id="btn-1" onclick="user(1);">1</button>
         <button id="btn-2" onclick="user(2);">2</button>
@@ -118,7 +118,7 @@ var score, guessRemaining, aiNum;
 
 function reset(){
     score = 0;
-    guessRemaining = 5;
+    guessRemaining = 10;
     document.getElementById('score').innerHTML=score;
     document.getElementById('guess-remaining').innerHTML=guessRemaining;
     document.getElementById('ai-number').innerHTML='';
@@ -126,6 +126,7 @@ function reset(){
     document.getElementById('msg').innerHTML='Start';
     document.getElementById('result').innerHTML='';
     ai();
+    
 };
 
 function ai(){
@@ -149,9 +150,19 @@ function displayResult(){
     document.getElementById('score').innerHTML=score;
     document.getElementById('guess-remaining').innerHTML=guessRemaining;
     if(guessRemaining==0){
-        document.getElementById('result').innerHTML='Your score: '+score+' out of 5 moves.';
+        document.getElementById('result').innerHTML='Your score: '+score+' out of 10 moves.';
+        document.getElementById('btn-1').disabled="true";
+        document.getElementById('btn-2').disabled="true";
+        document.getElementById('btn-3').disabled="true";
+        document.getElementById('btn-4').disabled="true";
+        document.getElementById('btn-5').disabled="true";
+        document.getElementById('btn-6').disabled="true";
+        document.getElementById('btn-7').disabled="true";
+        document.getElementById('btn-8').disabled="true";
+        document.getElementById('btn-9').disabled="true";
     }else{
         ai();
+    
     }
   
 };
