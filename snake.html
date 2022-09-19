@@ -6,6 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Word guessing game</title>
   <style>
+ h1{
+    animation: change 3s infinite;
+  }
+  @keyframes change {
+    0%{color:#ff00ff;}
+    25%{color:#e1ffd6 ;}
+    50%{color:#ffff00 ;}
+    75%{color:#2a0c40 ;}
+    100%{color:#ff0000 ;}
+  }
 
 body{
   text-align: center;
@@ -33,12 +43,12 @@ input,button{
 
   </style>
 </head>
-<body>
+<body> 
+<br>
+<h1>GUESS THE WORD</h1>
   <br> <br> <br> <br> <br> <br> <br> <br> 
   
   <div id="chooseDifficulty" style="display: block">
-
-    <h1>Guess a Word</h1>
     <h5>Choose a difficulty</h5>
     <button title="very easy" onclick="chooseDif1()">easy</button>
     <button title="not difficult" onclick="chooseDif2()">normal</button>
