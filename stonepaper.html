@@ -39,6 +39,12 @@ font-size: 20px;
   color: brown;
   letter-spacing:2px;
 }
+#page{
+  outline: none;
+  border: none;
+  width: 100%;
+  background:#4cb050 ;
+}
 
 h2{
     animation: change 10s infinite;
@@ -55,7 +61,6 @@ h2{
 </head>
 <body>
   <h1>PLAY CRICKET</h1>
-  <br> <br> 
   <p id="p1">First you tossed and win for getting chance choose batting or fielding </p>
   <input type="button" value="flip a cion" id="btn" onclick="tossed()">
    <p id="resulttossed">Result of Tossing</p>
@@ -63,9 +68,18 @@ h2{
    <div id="field">
    <p style="color:#ffff ;">PLAYGROUND</p>
    <input type="button" value="BATTING" id="btn" onclick="batting()">
-   <p style="color:yellow ;">Score Dashboard:<span id="resultbatting"></span></p>
+   <p style="color:yellow ;">Score Dashboard: <span id="resultbatting"></span></p>
    </div>
    <h2>BEST OF LUCK !</h2>
+   <div id="field">
+    <p style="color:#ffff ;">BOOK CRICKET</p>
+    <input type="text" id="page" placeholder="Enter no. of page ">
+    <input type="button" value="BATTING" id="btn" onclick="battingbook()">
+    <p style="color:yellow ;">Page Number: <span id="Showpage"></span></p>
+    <p style="color:yellow ;">Score Dashboard: <span id="resultbatting2"></span></p>
+     <p>Rules of book Cricket: 0 Out, 3 free hit, 5 dot ball,<br> 7 wide ball, 8 no ball(2 run), 9 no ball(4 run) </p>
+    </div>
+  
    <a style="text-decoration:none;" href="index.html">Menu</a> <br>
   <script>
 
@@ -79,6 +93,14 @@ h2{
       const  b=["single","Two", "No run", "Over the boundry, its six", "wide ball" ,"no ball", "Boundary, its four", "Miss" ,"Wicket"]
   let ranitems = b[Math.floor(Math.random() * b.length)];
   document.getElementById("resultbatting").innerHTML=ranitems
+    }
+
+    function battingbook(){
+      let booksize=document.getElementById("page").value;
+      const c= Math.floor(Math.random()*booksize)+1;
+      let score = c % 10;
+      document.getElementById("resultbatting2").innerHTML=score
+      document.getElementById("Showpage").innerHTML=c
     }
   </script>
 </body>
