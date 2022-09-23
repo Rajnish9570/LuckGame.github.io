@@ -8,25 +8,26 @@
   <style>
     body{
       text-align: center;
-      margin: 10px;
+      margin: 5px;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
-       background-color:darkturquoise;
+      background-color:white;
     }
     #btn{
     font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 800;
-    background-color: aqua;
-    box-shadow: inset 2px 1px 17px 1px gray;
+    background-color: white;
+    box-shadow: 0px 2px 2px 1px wheat;
     outline: none;
     border: none;
     }
 div{
-  background: #4cb050;
+  background: white;
   margin: 0;
   padding: 20px;
   height: 100%;
+  box-shadow:inset 1px 2px 12px 0px grey;
 }
 #resulttossed{
 text-transform:uppercase;
@@ -35,7 +36,7 @@ font-weight:900;
 letter-spacing: 2px;
 font-size: 20px;
 }
-#resultbatting{
+#resultbatting,#resultbatting2,#Showpage{
   font-weight: 900;
   color: brown;
   letter-spacing:2px;
@@ -43,41 +44,54 @@ font-size: 20px;
 #page{
   outline: none;
   border: none;
-  width: 100%;
-  background:#4cb050 ;
+  width: 130px;
+  background: white;
+  float: left;
 }
 
 h2{
-    animation: change 10s infinite;
+    animation: change 2.5s infinite;
   }
   @keyframes change {
-    0%{color:#ffffff;}
-    25%{color:blue}
-    50%{color:#ffffff}
-    75%{color:#0000ff;}
-    100%{color:#ffffff ;}
+    0%{color:#fff;}
+    25%{color:#ffffff}
+    50%{color:#fff}
+    75%{color:blue;}
+    100%{color:#0000ff ;}
   }
+h1{
+  color: #0000ff;
 
+}
+span{
+  color: red;
+}
+#letter{
+  color: yellow;
+}
+#letter2{
+  color: burlywood;
+}
   </style>
 </head>
 <body>
-  <h1>PLAY CRICKET</h1>
+  <h1>PL<span>AY</span> <span id="letter2">CR</span>I<span id="letter">CK</span><span>ET</span></h1>
   <p id="p1">First you tossed and win for getting chance choose batting or fielding </p>
   <input type="button" value="flip a cion" id="btn" onclick="tossed()">
    <p id="resulttossed">Result of Tossing</p>
-   <hr color=" lightgreen">
+
    <div id="field">
-   <p style="color:#ffff ;">PLAYGROUND</p>
+   <p id="p1">PLAYGROUND</p>
    <input type="button" value="BATTING" id="btn" onclick="batting()">
-   <p style="color:yellow ;">Score Dashboard: <span id="resultbatting"></span></p>
+   <p style="color:blue ;">Score Dashboard: <span id="resultbatting"></span></p>
    </div>
    <h2>BEST OF LUCK !</h2>
    <div id="field">
-    <p style="color:#ffff ;">BOOK CRICKET</p>
-    <input type="text" id="page" placeholder="Enter no. of page ">
+    <p id="p1">BOOK CRICKET</p>
+    <input type="text" id="page" placeholder="Enter no. of page "> <br>
     <input type="button" value="BATTING" id="btn" onclick="battingbook()">
-    <p style="color:yellow ;">Page Number: <span id="Showpage"></span></p>
-    <p style="color:yellow ;">Score Dashboard: <span id="resultbatting2"></span></p>
+    <p style="color:blue ;">Page Number: <span id="Showpage"></span></p>
+    <p style="color:blue ;">Score Dashboard: <span id="resultbatting2"></span></p>
      <p>Rules of book Cricket: 0 Out, 3 free hit, 5 dot ball,<br> 7 wide ball, 8 no ball(2 run), 9 no ball(4 run) </p>
     </div>
   
