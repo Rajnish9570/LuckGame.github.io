@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Play Cricket</title>
+  <style>
+    body{
+      text-align: center;
+      margin: 10px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    #btn{
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 800;
+    background-color: aqua;
+    box-shadow: inset 2px 1px 17px 1px gray;
+    outline: none;
+    border: none;
+    }
+div{
+  background: #4cb050;
+  margin: 0;
+  padding: 20px;
+  height: 100%;
+}
+#resulttossed{
+text-transform:uppercase;
+color: blue;
+font-weight:900;
+letter-spacing: 2px;
+font-size: 20px;
+}
+#resultbatting{
+  font-weight: 900;
+  color: brown;
+  letter-spacing:2px;
+}
+
+h2{
+    animation: change 10s infinite;
+  }
+  @keyframes change {
+    0%{color:#ffffff;}
+    25%{color:blue}
+    50%{color:#ffffff}
+    75%{color:#0000ff;}
+    100%{color:#ffffff ;}
+  }
+
+  </style>
+</head>
+<body>
+  <h1>PLAY CRICKET</h1>
+  <br> <br> 
+  <p id="p1">First you tossed and win for getting chance choose batting or fielding </p>
+  <input type="button" value="flip a cion" id="btn" onclick="tossed()">
+   <p id="resulttossed">Result of Tossing</p>
+   <hr color=" lightgreen">
+   <div id="field">
+   <p style="color:#ffff ;">PLAYGROUND</p>
+   <input type="button" value="BATTING" id="btn" onclick="batting()">
+   <p style="color:yellow ;">Score Dashboard:<span id="resultbatting"></span></p>
+   </div>
+   <h2>BEST OF LUCK !</h2>
+   <a style="text-decoration:none;" href="index.html">Menu</a> <br>
+  <script>
+
+    function tossed(){
+  const  a=["head","tail"]
+  let ranItem = a[Math.floor(Math.random() * a.length)];
+  document.getElementById("resulttossed").innerHTML=ranItem
+    }
+
+    function batting(){
+      const  b=["single","Two", "No run", "Over the boundry, its six", "wide ball" ,"no ball", "Boundary, its four", "Miss" ,"Wicket"]
+  let ranitems = b[Math.floor(Math.random() * b.length)];
+  document.getElementById("resultbatting").innerHTML=ranitems
+    }
+  </script>
+</body>
+</html>
