@@ -54,19 +54,24 @@
   color: #7BBECD;
 }
 
-
+body{
+  margin: 10px;
+}
 
 #start,#reset{
-  width: 100px;
-  height: 28px;
-  background-color: #658397;
+  width: 100%;
+  height: 50px;
+  background-color:white;
   border-radius: 10px;
   box-shadow: 2px 2px 5px #658397;
   color: white;
   text-align: center;
-  padding-top:5px;
   cursor: pointer;
-  margin-left: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  color: #7BBECD;
+text-shadow:  1px 4px 0px gray ;
+font-size: large;
 }
 
 #block1{
@@ -108,8 +113,6 @@ a, #a{
   text-align: center;
   font-weight: bold;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size:30px;
-    font-weight:bold;
 }
 </style>
 <body>
@@ -135,13 +138,13 @@ a, #a{
             <div id="block8" onclick="move(8)">8</div>
         </div>
     </div>
-    <br> <br> <br>
-    <div id="time">
+    <br> <br> <br> <br> <br> <br> 
+    <div id="time" style="text-align:center ;">
       <h3 id="timeText">Total Time ⏲️ <span id="timer"></span></h3>
 
-       <h3 id="start" onclick="start()">Start</h3> 
-       <br>
-      <h3 id="reset" onclick="reset()">Reset</h3>
+       <input type="button" id="start" value="PAUSE / START" onclick="start()">
+       <br> <br>
+       <input type="button" id="reset" value="RESET" onclick="reset()">
     </div>
     <script>
       var time = 0;
@@ -246,19 +249,19 @@ function timer(){
   time +=1;
   var min = parseInt(time/60);
   var sec = time%60;
-  document.getElementById("timer").innerHTML = min + "min" + sec + "sec";
+  document.getElementById("timer").innerHTML = min + " min" + sec + " sec";
 
 }
 
 function start(){
   if(pause){
-    document.getElementById("start").innerHTML = "Pause";
+    document.getElementById("start").innerText = "Pause";
     pause = false;
     set_timer = setInterval(timer,1000); //execute the function every 1 sec
 
   }
   else{
-    document.getElementById("start").innerHTML = "Start";
+    document.getElementById("start").innerText= "Start";
     pause = true;
     clearInterval(set_timer);
   }
