@@ -7,371 +7,259 @@
   <title>Document</title>
 </head>
 <style>
-* {
-  box-sizing: border-box;
-}
+  body{
+    text-align: center;
+  }
+
+  @import url('https://fonts.googleapis.com/css?family=Poppins');
+
 body {
-  
-  background-color: #0af;
+    font-family: 'Poppins', sans-serif;
 }
 
-#text {
-  width: 100%;
-  height: 400px;
-
-  resize: none;
-  overflow-y: auto;
-  font-size: 16px;
-  cursor: auto;
-}
-@media (max-width: 600px) {
-  #text {
-    width: 100%;
-  }
-}
-.keyboard {
-  display: block;
-  width: 332px;
-  height: 124px;
-  padding-left: 4px;
-  background-color: #0af;
-  border-radius: 6px;
-  box-shadow: 3px 1px 4px 4px gray;
-}
-#key {
-  display: none;
-}
-#maths {
-  display: none;
-}
-.row1 {
-  position: relative;
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  margin-top: 4px;
-  background-color: #ddd;
-  border: 1px solid #000;
-  border-radius: 4px;
-  text-align: center;
-  box-shadow: 0 0 3px #000;
-  cursor: pointer;
-}
-.row1:active {
-  box-shadow: 0 0 1px #000;
-}
-#lett-change,#symbol-change {
-  position: absolute;
-  bottom: 52px;
-  left: 50px;
-  width: 56px;
-  height: 24px;
-  margin-top: -2px;
-  padding-bottom: 0px;
-  background-color: #ddd;
-  border: 1px solid #000;
-  border-radius: 4px;
-  text-align: center;
-  box-shadow: 0 0 3px #000;
-  cursor: pointer;
-}
-#letter-change{
-  position: absolute;
-  bottom: 52px;
-  left: 50px;
-  width: 56px;
-  height: 24px;
-  margin-top: -2px;
-  padding-bottom: 0px;
-  background-color: #ddd;
-  border: 1px solid #000;
-  border-radius: 4px;
-  text-align: center;
-  box-shadow: 0 0 3px #000;
-  cursor: pointer;
-}
-#symbol-change:active,
-#letter-change:active {
-  box-shadow: 0 0 1px #000;
-}
-#math-change
- {
-  position: absolute;
-  bottom: 52px;
-  left: 240px;
-  width: 54px;
-  height: 24px;
-  margin-top: -2px;
-  padding-bottom: 0px;
-  background-color: #ddd;
-  border: 1px solid #000;
-  border-radius: 4px;
-  text-align: center;
-  box-shadow: 0 0 3px #000;
-  cursor: pointer;
-}
-#math-change:active,
-#lett-change:active {
-  box-shadow: 0 0 1px #000;
+main {
+    width: 44%;
+    margin: 2rem auto;
+    text-align: center;
+    background: #f6f6f6;
+    padding: 1rem;
+    border-radius: 4px;
 }
 
-a{
-  float: right;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 5px;
-  box-shadow: 2px 1px 4px 1px gray;
+main label, main input {
+    display: block;
 }
-  </style>
+
+main input {
+    text-align: center;
+    width: 50%;
+    margin: 1rem auto;
+}
+
+#daysBtn, #hoursBtn, #minutesBtn, #secondsBtn {
+    background: gray;
+    width: 18%;
+    border: 2px solid gray;
+    border-radius: 4px;
+    padding: 4px 9px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+}
+
+.clock {
+    border-left: 300px solid white;
+    border-right: 300px solid white;
+    color: blueviolet;
+    font-size: 40px;
+    font-family: Orbitron;
+    letter-spacing: 7px;
+    height: 50px;
+    padding: 10px;
+    background: black;
+    color: yellow;
+     text-shadow: 2px 3px 1px  green ;
+}
+</style>
 <body>
-  <div class="title">
+  <h1>PLAY WITH TIME </h1>
+<canvas id="canvas" width="400" height="400"
+style="background-color:#ffffff">
+</canvas> <br> <br>
+
+<div id="digitalclock">
+
+  <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+
+</div>
+
+
+<body onload="attachEventsListeners()">
+  <main>
+      <h1>Time Converter</h1>
+      <div>
+          <label for="days">Days: </label>
+          <input type="text" id="days">
+          <input id="daysBtn" type="button" value="Convert">
+      </div>
+      <div>
+          <label for="hours">Hours: </label>
+          <input type="text" id="hours">
+          <input id="hoursBtn" type="button" value="Convert">
+      </div>
+      <div>
+          <label for="minutes">Minutes: </label>
+          <input type="text" id="minutes">
+          <input id="minutesBtn" type="button" value="Convert">
+      </div>
+      <div>
+          <label for="seconds">Seconds: </label>
+          <input type="text" id="seconds">
+          <input id="secondsBtn" type="button" value="Convert">
+      </div>
+      <a href="index.html">Menu</a>
+  </main>
+</body>
+
+
+<script>
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
+
+function drawFace(ctx, radius) {
+  var grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+  ctx.fillStyle = 'blue';
+  ctx.fill();
+  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+  grad.addColorStop(0, '#ffffff');
+  grad.addColorStop(0.5, 'white');
+  grad.addColorStop(1, 'grey');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius*0.1;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+}
+
+function drawNumbers(ctx, radius) {
+  var ang;
+  var num;
+  ctx.font = radius*0.15 + "px arial";
+  ctx.textBaseline="middle";
+  ctx.textAlign="center";
+  for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+  }
+}
+
+function drawTime(ctx, radius){
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    //hour
+    hour=hour%12;
+    hour=(hour*Math.PI/6)+
+    (minute*Math.PI/(6*60))+
+    (second*Math.PI/(360*60));
+    drawHand(ctx, hour, radius*0.5, radius*0.07);
+    //minute
+    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    // second
+    second=(second*Math.PI/30);
+    drawHand(ctx, second, radius*0.9, radius*0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = "round";
+    ctx.moveTo(0,0);
+    ctx.rotate(pos);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.rotate(-pos);
+}
+
+
+
+function showTime(){
+    var date = new Date();
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+    var session = "AM";
     
-  </div>
-  <textarea placeholder="SAVE YOUR SCORE HERE" id="text"></textarea> <br> 
-  <div class="keyboard">
-    <div class="row1" id="0" onclick="letter_click(this.id)">q</div>
-    <div class="row1" id="1" onclick="letter_click(this.id)">w</div>
-    <div class="row1" id="2" onclick="letter_click(this.id)">e</div>
-    <div class="row1" id="3" onclick="letter_click(this.id)">r</div>
-    <div class="row1" id="4" onclick="letter_click(this.id)">t</div>
-    <div class="row1" id="5" onclick="letter_click(this.id)">y</div>
-    <div class="row1" id="6" onclick="letter_click(this.id)">u</div>
-    <div class="row1" id="7" onclick="letter_click(this.id)">i</div>
-    <div class="row1" id="8" onclick="letter_click(this.id)">o</div>
-    <div class="row1" id="9" onclick="letter_click(this.id)">p</div>
-    <div class="row1" id="10" onclick="popArray()">&larr;</div><br>
-    <div class="row1" id="11" onclick="letter_click(this.id)" style="margin-left:14px;">a</div>
-    <div class="row1" id="12" onclick="letter_click(this.id)">s</div>
-    <div class="row1" id="13" onclick="letter_click(this.id)">d</div>
-    <div class="row1" id="14" onclick="letter_click(this.id)">f</div>
-    <div class="row1" id="15" onclick="letter_click(this.id)">g</div>
-    <div class="row1" id="16" onclick="letter_click(this.id)">h</div>
-    <div class="row1" id="17" onclick="letter_click(this.id)">j</div>
-    <div class="row1" id="18" onclick="letter_click(this.id)">k</div>
-    <div class="row1" id="19" onclick="letter_click(this.id)">l</div>
-    <div class="row1" id="20" onclick="download()" style="width:40px;">save</div><br>
-    <div class="row1" id="21" onclick="letter_click(this.id)" style="margin-left:28px;">z</div>
-    <div class="row1" id="22" onclick="letter_click(this.id)">x</div>
-    <div class="row1" id="23" onclick="letter_click(this.id)">c</div>
-    <div class="row1" id="24" onclick="letter_click(this.id)">v</div>
-    <div class="row1" id="25" onclick="letter_click(this.id)">b</div>
-    <div class="row1" id="26" onclick="letter_click(this.id)">n</div>
-    <div class="row1" id="27" onclick="letter_click(this.id)">m</div>
-    <div class="row1" id="28" onclick="capitol_click()" style="width:64px;">shift</div><br>
-    <div class="row1" id="29" onclick="letter_click(this.id)" style="width:118px;margin-left: 103px">space</div>
-    <div id="symbol-change" onclick="setSymbols()" style="width:60px">symbol</div>
-    <div id="math-change" onclick="setMaths()">maths</div>
-  </div>
-  <div class="keyboard" id="key">
-    <div class="row1" id="30" onclick="letter_click(this.id)">!</div>
-    <div class="row1" id="31" onclick="letter_click(this.id)">&quot;</div>
-    <div class="row1" id="32" onclick="letter_click(this.id)">&pound;</div>
-    <div class="row1" id="33" onclick="letter_click(this.id)">$</div>
-    <div class="row1" id="34" onclick="letter_click(this.id)">%</div>
-    <div class="row1" id="35" onclick="letter_click(this.id)">^</div>
-    <div class="row1" id="36" onclick="letter_click(this.id)">&amp;</div>
-    <div class="row1" id="37" onclick="letter_click(this.id)">*</div>
-    <div class="row1" id="38" onclick="letter_click(this.id)">(</div>
-    <div class="row1" id="39" onclick="letter_click(this.id)">)</div>
-    <div class="row1" id="40" onclick="letter_click(this.id)">_</div><br>
-    <div class="row1" id="41" onclick="letter_click(this.id)" style="margin-left:14px;">-</div>
-    <div class="row1" id="42" onclick="letter_click(this.id)">+</div>
-    <div class="row1" id="43" onclick="letter_click(this.id)">=</div>
-    <div class="row1" id="44" onclick="letter_click(this.id)">{</div>
-    <div class="row1" id="45" onclick="letter_click(this.id)">}</div>
-    <div class="row1" id="46" onclick="letter_click(this.id)">[</div>
-    <div class="row1" id="47" onclick="letter_click(this.id)">]</div>
-    <div class="row1" id="48" onclick="letter_click(this.id)">:</div>
-    <div class="row1" id="49" onclick="letter_click(this.id)">;</div>
-    <div class="row1" id="50" onclick="letter_click(this.id)">'</div><br>
-    <div class="row1" id="51" onclick="letter_click(this.id)" style="margin-left:28px;">@</div>
-    <div class="row1" id="52" onclick="letter_click(this.id)">~</div>
-    <div class="row1" id="53" onclick="letter_click(this.id)">#</div>
-    <div class="row1" id="54" onclick="letter_click(this.id)">|</div>
-    <div class="row1" id="55" onclick="letter_click(this.id)">\</div>
-    <div class="row1" id="56" onclick="letter_click(this.id)">/</div>
-    <div class="row1" id="57" onclick="letter_click(this.id)">?</div>
-    <div class="row1" id="58" onclick="letter_click(this.id)">&lt;</div>
-    <div class="row1" id="59" onclick="letter_click(this.id)">&gt;</div>
-    <div id="letter-change" onclick="resetLetters()">letters</div>
-    <div class="row1" id="60" onclick="letter_click(this.id)" style="width:118px;margin-left: 103px">space</div>
-    <div class="row1" id="61" onclick="letter_click(this.id)">,</div>
-    <div class="row1" id="62" onclick="letter_click(this.id)">.</div>
-  </div>
-  <div class="keyboard" id="maths">
-    <div class="row1" id="63" onclick="letter_click(this.id)" style="margin-left:24px;">1</div>
-    <div class="row1" id="64" onclick="letter_click(this.id)">2</div>
-    <div class="row1" id="65" onclick="letter_click(this.id)">3</div>
-    <div class="row1" id="66" onclick="letter_click(this.id)">4</div>
-    <div class="row1" id="67" onclick="letter_click(this.id)">5</div>
-    <div class="row1" id="68" onclick="letter_click(this.id)">6</div>
-    <div class="row1" id="69" onclick="letter_click(this.id)">7</div>
-    <div class="row1" id="70" onclick="letter_click(this.id)">8</div>
-    <div class="row1" id="71" onclick="letter_click(this.id)">9</div>
-    <div class="row1" id="72" onclick="letter_click(this.id)">0</div><br>
-    <div class="row1" id="73" onclick="letter_click(this.id)" style="margin-left: 38px;">√</div>
-    <div class="row1" id="74" onclick="letter_click(this.id)">%</div>
-    <div class="row1" id="75" onclick="letter_click(this.id)">(</div>
-    <div class="row1" id="76" onclick="letter_click(this.id)">)</div>
-    <div class="row1" id="77" onclick="letter_click(this.id)">∞</div>
-    <div class="row1" id="78" onclick="letter_click(this.id)">°</div>
-    <div class="row1" id="79" onclick="letter_click(this.id)">¼</div>
-    <div class="row1" id="80" onclick="letter_click(this.id)">½</div>
-    <div class="row1" id="81" onclick="letter_click(this.id)">¾</div>
-    <div class="row1" id="82" onclick="letter_click(this.id)" style="margin-left: 53px;">+</div>
-    <div class="row1" id="83" onclick="letter_click(this.id)">−</div>
-    <div class="row1" id="84" onclick="letter_click(this.id)">×</div>
-    <div class="row1" id="85" onclick="letter_click(this.id)">÷</div>
-    <div class="row1" id="86" onclick="letter_click(this.id)">=</div>
-    <div class="row1" id="87" onclick="letter_click(this.id)">∑</div>
-    <div class="row1" id="88" onclick="letter_click(this.id)">?</div>
-    <div class="row1" id="89" onclick="letter_click(this.id)">_</div>
-    <div class="row1" id="90" onclick="letter_click(this.id)" style="width:118px;margin-left: 103px">space</div>
-    <div id="lett-change" onclick="resetLett()">letters</div>
-  </div>
-  <a href="index.html">HOME PAGE</a>
-  <script>
-    var i;
-// load array with chosen letters //
-var letters = [];
-var lower = [
-  "q",
-  "w",
-  "e",
-  "r",
-  "t",
-  "y",
-  "u",
-  "i",
-  "o",
-  "p",
-  "&larr;",
-  "a",
-  "s",
-  "d",
-  "f",
-  "g",
-  "h",
-  "j",
-  "k",
-  "l",
-  "save",
-  "z",
-  "x",
-  "c",
-  "v",
-  "b",
-  "n",
-  "m",
-  "shift",
-  "space"
-];
-var capitols = [
-  "Q",
-  "W",
-  "E",
-  "R",
-  "T",
-  "Y",
-  "U",
-  "I",
-  "O",
-  "P",
-  "&larr;",
-  "A",
-  "S",
-  "D",
-  "F",
-  "G",
-  "H",
-  "J",
-  "K",
-  "L",
-  "save",
-  "Z",
-  "X",
-  "C",
-  "V",
-  "B",
-  "N",
-  "M",
-  "shift",
-  "space"
-];
-
-const row = document.querySelectorAll(".row1");
-const board = document.querySelector(".keyboard");
-const key = document.querySelector("#key");
-const maths = document.querySelector("#maths");
-
-function letter_click(clicked_id) {
-  var text = document.getElementById("text");
-  if (row[clicked_id].innerHTML == "space") {
-    row[clicked_id].innerHTML = " ";
-    letters.push(row[clicked_id].innerHTML);
-    replaceHypertext();
-  } else {
-    letters.push(row[clicked_id].innerHTML);
-  }
-  for (i = 0; i < letters.length; i++) {
-    text.innerHTML = letters.join("");
-  }
-}
-function replaceHypertext() {
-  row[29].innerHTML = "space";
-  row[60].innerHTML = "space";
-  row[90].innerHTML = "space";
-}
-function capitol_click() {
-  for (i = 0; i < capitols.length; i++) {
-    if (row[i].innerHTML == capitols[i]) {
-      row[i].innerHTML = lower[i];
-    } else {
-      row[i].innerHTML = capitols[i];
+    if(h == 0){
+        h = 12;
     }
-  }
-}
-function popArray() {
-  letters.pop();
-  text.innerHTML = letters.join("");
-}
-function setSymbols() {
-  board.style.display = "none";
-  maths.style.display = "none";
-  key.style.display = "block";
-}
-function resetLetters() {
-  board.style.display = "block";
-  maths.style.display = "none";
-  key.style.display = "none";
-}
-function setMaths() {
-  board.style.display = "none";
-  maths.style.display = "block";
-  key.style.display = "none";
-}
-function resetLett() {
-  board.style.display = "block";
-  maths.style.display = "none";
-  key.style.display = "none";
-}
-function download() {
-  var text = document.getElementById("text").value;
-  text = text.replace(/\n/g, "\r\n"); // To retain the Line breaks.
-  var blob = new Blob([text], { type: "text/plain" });
-  var anchor = document.createElement("a");
-  anchor.download = "my-filename.txt";
-  anchor.href = window.URL.createObjectURL(blob);
-  anchor.target = "_blank";
-  anchor.style.display = "none"; // just to be safe!
-  document.body.appendChild(anchor);
-  anchor.click();
-  document.body.removeChild(anchor);
+    
+    if(h > 12){
+        h = h - 12;
+        session = "PM";
+    }
+    
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    
+    var time = h + ":" + m + ":" + s + " " + session;
+    document.getElementById("MyClockDisplay").innerText = time;
+    document.getElementById("MyClockDisplay").textContent = time;
+    
+    setTimeout(showTime, 1000);
+    
 }
 
+showTime();
+
+function attachEventsListeners() {
+     let ratios = {
+        days: 1,
+        hours: 24,
+        minutes: 1440,
+        seconds: 86400
+    };
+    
+    function convertValue(value, from) {
+        const inDays = value / ratios[from];
+        return {
+            days: inDays,
+            hours:inDays * ratios.hours,
+            minutes: inDays * ratios.minutes,
+            seconds: inDays * ratios.seconds
+        };
+    }
+    
+    const daysDiv = document.getElementById('days');
+    const hoursDiv = document.getElementById('hours');
+    const minutesDiv = document.getElementById('minutes');
+    const secondsDiv = document.getElementById('seconds');
+
+    document.getElementById('daysBtn').addEventListener('click', convertTime);
+    document.getElementById('hoursBtn').addEventListener('click', convertTime);
+    document.getElementById('minutesBtn').addEventListener('click', convertTime);
+    document.getElementById('secondsBtn').addEventListener('click', convertTime);
 
 
-  </script>
+    function convertTime(e) {
+        let value = Number(e.target.parentNode.querySelector('input[type="text"]').value);
+        let from = e.target.parentNode.querySelector('input[type="text"]').id;
+        const convertedValues = convertValue(value, from);
+        display(convertedValues);
+    }
+    
+
+    function display(valuesToDisplay) {
+        daysDiv.value = valuesToDisplay.days;
+        hoursDiv.value = valuesToDisplay.hours;
+        minutesDiv.value = valuesToDisplay.minutes;
+        secondsDiv.value = valuesToDisplay.seconds;
+
+    }
+}
+</script>
 </body>
 </html>
