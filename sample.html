@@ -1,208 +1,391 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">  
-    <title>QR Code Scanner or Reader </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  </head>
-  <style>
-/* Import Google Font - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-body{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 0 10px;
-  background: #E3F2FD;
-}
-.wrapper{
-  height: 270px;
-  width: 420px;
-  border-radius: 7px;
-  background: #0B85FF;
-  padding: 30px 30px 35px;
-  transition: height 0.2s ease;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-.wrapper.active{
-  height: 525px;
-}
-.wrapper form{
-  height: 210px;
-  display: flex;
-  cursor: pointer;
-  user-select: none;
-  text-align: center;
-  border-radius: 7px;
-  background: #fff;
-  align-items: center;
-  justify-content: center;
-  transition: height 0.2s ease;
-}
-.wrapper.active form{
-  height: 225px;
-  pointer-events: none;
-}
-form img{
-  display: none;
-  max-width: 148px;
-}
-.wrapper.active form img{
-  display: block;
-}
-.wrapper.active form .content{
-  display: none;
-}
-form .content i{
-  color: #0B85FF;
-  font-size: 55px;
-}
-form .content p{
-  color: #0B85FF;
-  margin-top: 15px;
-  font-size: 16px;
-}
-.wrapper .details{
-  opacity: 0;
-  margin-top: 25px;
-  pointer-events: none;
-}
-.wrapper.active .details{
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 0.5s 0.05s ease;
-}
-.details textarea{
-  width: 100%;
-  height: 128px;
-  outline: none;
-  resize: none;
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body{
+    text-align: center;
+    background: #000021;
+  }
+  .animate-charcter
+{
+   text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
   color: #fff;
-  font-size: 18px;
-  background: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  border: 1px solid #fff;
-}
-textarea::-webkit-scrollbar{
-  width: 0px;
-}
-textarea:hover::-webkit-scrollbar{
-  width: 5px;
-}
-textarea:hover::-webkit-scrollbar-track{
-  background: none;
-}
-textarea:hover::-webkit-scrollbar-thumb{
-  background: #fff;
-  border-radius: 8px;
-}
-.details .buttons{
-  display: flex;
-  margin-top: 20px;
-  align-items: center;
-  justify-content: space-between;
-}
-.buttons button{
-  height: 55px;
-  outline: none;
-  border: none;
-  font-weight: 500;
-  font-size: 16px;
-  cursor: pointer;
-  color: #0B85FF;
-  border-radius: 5px;
-  background: #fff;
-  transition: transform 0.3s ease;
-  width: calc(100% / 2 - 10px);
-}
-.buttons button:active{
-  transform: scale(0.95);
-}
-
-@media (max-width: 450px) {
-  .wrapper{
-    padding: 25px;
-    height: 260px;
-  }
-  .wrapper.active{
-    height: 520px;
-  }
-}
-
-  </style>
+  background-clip: text;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  text-align: center;
+  font-size: 3rem;
   
-  <body>
-    <h2 ><a style="text-decoration: none;" href="index.html">Menu</a></h2>
-    <div class="wrapper">
-      <form action="#">
-        <input type="file" hidden>
-        <img src="#" alt="qr-code">
-        <div class="content">
-          <i class="fas fa-cloud-upload"></i>
-          <p>Upload QR Code to Read</p>
-          <br>
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+a{
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 10px;
+  color: #999
+}
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
+
+body {
+  
+  font-family:'Roboto';
+  text-align:center;
+}
+
+#container2 {
+  color:#999;
+  text-transform: uppercase;
+  font-size:36px;
+  font-weight:bold;
+  display:block;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#flip {
+  height:50px;
+  overflow:hidden;
+  
+}
+
+#flip > div > div {
+  color:#fff;
+  padding:4px 12px;
+  height:45px;
+  margin-bottom:45px;
+  display:inline-block;
+  
+}
+ h4{
+  color: whitesmoke;
+  text-transform: uppercase;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.99999rem;
+  letter-spacing: 1px;
+ }
+#flip div:first-child {
+  animation: show 5s linear infinite;
+}
+
+#flip div div {
+  background:#42c58a;
+  border-radius:10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#flip div:first-child div {
+  background:#fff;
+  border-radius: 10px;
+  color: #231557;
+}
+#flip div:last-child div {
+  background:#DC143C;
+  border-radius: 10px;
+  color: gold;
+}
+
+@keyframes show {
+  0% {margin-top:-270px;}
+  5% {margin-top:-180px;}
+  33% {margin-top:-180px;}
+  38% {margin-top:-90px;}
+  66% {margin-top:-90px;}
+  71% {margin-top:0px;}
+  99.99% {margin-top:0px;}
+  100% {margin-top:-270px;}
+}
+
+p {
+position: fixed;
+width:100%;
+bottom:30px;
+font-size:12px;
+color:#999;
+margin-top:200px;
+}
+
+h5 {
+    font-weight: 200;
+    text-align: center;
+    font-family: Poppins, sans-serif;
+    font-size: 1.9em;
+    color: #ffffff;
+    padding: 0;
+    line-height: 0.8em !important;
+    text-transform: none;
+}
+
+h5 span {
+    color:blue;
+    animation-delay: 2s;
+    font-weight: bold;
+}
+
+
+.containers {
+  display: flex;
+}
+
+.containers a{
+  animation: shake 0.5s infinite;
+  font-size: 0.9999rem;
+  color: blueviolet;
+  text-decoration: none;
+  margin: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+  10% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  100% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+}
+
+
+
+
+
+
+
+.wavy {
+  position: relative;
+  -webkit-box-reflect: below -12px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+}
+.wavy span {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  font-size: 2em;
+  text-transform: uppercase;
+  animation: animate 1.5s ease-in-out infinite;
+  animation-delay: calc(.1s * var(--i))
+}
+@keyframes animate {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  20% {
+    transform: translateY(-20px);
+  }
+  40% {
+    transform: translateY(0px);
+  }
+}
+
+
+
+
+
+
+.swing {
+    animation: swing ease-in-out 1s infinite alternate;
+    transform-origin: center -20px;
+
+}
+.swing img {
+    border: 5px solid #f8f8f8;
+    display: block;
+    
+}
+.swing:after{
+    content: '';
+  
+    width: 20px; height: 20px;  
+    border: 1px solid #999;
+    
+    z-index: 0;
+    border-bottom: none;
+    border-right: none;
+    transform: rotate(45deg);
+}
+/* nail */
+.swing:before{
+    content: '';
+    
+    width: 5px; height: 5px;
+    top: -14px;left: 54%;
+    z-index: 5;
+    border-radius: 50% 50%;
+    background: #fff;
+}
+ 
+@keyframes swing {
+    0% { transform: rotate(3deg); }
+    100% { transform: rotate(-3deg); }
+}
+p{
+  color: #999;
+  letter-spacing: 1px;
+  font-weight: 800;
+}
+</style>
+<body>
+ <a style="text-decoration:none ;" href="index.html"> HOME PAGE</a>
+  <h4>devloper</h4>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
           
-        </div>
-      </form>
-      <div class="details">
-        <textarea spellcheck="false" disabled></textarea>
-        <div class="buttons">
-          <button class="close">Close</button>
-          <button class="copy">Copy Text</button>
+         
+           
+
+          <figure class="swing" style="text-align:center ;">
+            <img src="devphoto.jpg" style="text-align: center;"  width="200" >
+          </figure> 
+          
+          <h3 class="animate-charcter">RAJNISH KUMAR</h3>
         </div>
       </div>
+      </div>
     </div>
-    <div>
+    
+    <div id=container2>
+      Make 
+      <div id=flip>
+        <div><div>worK</div></div>
+        <div><div>lifeStyle</div></div>
+        <div><div>Everything</div></div>
+      </div>
+      AweSoMe!
     </div>
-<script>
-  const wrapper = document.querySelector(".wrapper"),
-form = document.querySelector("form"),
-fileInp = form.querySelector("input"),
-infoText = form.querySelector("p"),
-closeBtn = document.querySelector(".close"),
-copyBtn = document.querySelector(".copy");
 
-function fetchRequest(file, formData) {
-    infoText.innerText = "Scanning QR Code...";
-    fetch("http://api.qrserver.com/v1/read-qr-code/", {
-        method: 'POST', body: formData
-    }).then(res => res.json()).then(result => {
-        result = result[0].symbol[0].data;
-        infoText.innerText = result ? "Upload QR Code to Scan" : "Couldn't scan QR Code";
-        if(!result) return;
-        document.querySelector("textarea").innerText = result;
-        form.querySelector("img").src = URL.createObjectURL(file);
-        wrapper.classList.add("active");
-    }).catch(() => {
-        infoText.innerText = "Couldn't scan QR Code";
-    });
-}
 
-fileInp.addEventListener("change", async e => {
-    let file = e.target.files[0];
-    if(!file) return;
-    let formData = new FormData();
-    formData.append('file', file);
-    fetchRequest(file, formData);
-});
+    <h5>I am a
+      <span class="txt-rotate" data-period="2000"
+          data-rotate='[ "web designer.", "wannabe developer.", "frontend developer." ]'></span>
+  </h5>
 
-copyBtn.addEventListener("click", () => {
-    let text = document.querySelector("textarea").textContent;
-    navigator.clipboard.writeText(text);
-});
 
-form.addEventListener("click", () => fileInp.click());
-closeBtn.addEventListener("click", () => wrapper.classList.remove("active"));
-</script>
-  </body>
+<div class="containers"><a href="mailto:rockstarrajnish4658@gmail.com">rockstarrajnish4658@gmail.com</a></div>
+<div class="containers"><a href="tel:9570986396">957-098-6396</a></div>
+
+
+<div class="wavy">
+  <span style="--i:1;">T</span>
+  <span style="--i:2;">H</span>
+  <span style="--i:3;">A</span>
+  <span style="--i:4;">N</span>
+  <span style="--i:5;">K</span>
+  <span style="--i:6;"> </span>
+  <span style="--i:7;">Y</span>
+  <span style="--i:8;">O</span>
+  <span style="--i:9;">U</span>
+  <span style="--i:10;">.</span>
+</div>
+
+    <script>
+  
+      var TxtRotate = function (el, toRotate, period) {
+  this.toRotate = toRotate;
+  this.el = el;
+  this.loopNum = 0;
+  this.period = parseInt(period, 10) || 2000;
+  this.txt = "";
+  this.tick();
+  this.isDeleting = false;
+};
+
+TxtRotate.prototype.tick = function () {
+  var i = this.loopNum % this.toRotate.length;
+  var fullTxt = this.toRotate[i];
+
+  if (this.isDeleting) {
+    this.txt = fullTxt.substring(0, this.txt.length - 1);
+  } else {
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+  }
+
+  this.el.innerHTML = '<span class="wrap">' + this.txt + "</span>";
+
+  var that = this;
+  var delta = 300 - Math.random() * 100;
+
+  if (this.isDeleting) {
+    delta /= 2;
+  }
+
+  if (!this.isDeleting && this.txt === fullTxt) {
+    delta = this.period;
+    this.isDeleting = true;
+  } else if (this.isDeleting && this.txt === "") {
+    this.isDeleting = false;
+    this.loopNum++;
+    delta = 500;
+  }
+
+  setTimeout(function () {
+    that.tick();
+  }, delta);
+};
+
+window.onload = function () {
+  var elements = document.getElementsByClassName("txt-rotate");
+  for (var i = 0; i < elements.length; i++) {
+    var toRotate = elements[i].getAttribute("data-rotate");
+    var period = elements[i].getAttribute("data-period");
+    if (toRotate) {
+      new TxtRotate(elements[i], JSON.parse(toRotate), period);
+    }
+  }
+  // INJECT CSS
+  var css = document.createElement("style");
+  css.type = "text/css";
+  css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+  document.body.appendChild(css);
+};
+    </script>
+</body>
 </html>
